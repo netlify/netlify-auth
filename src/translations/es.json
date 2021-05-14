@@ -36,6 +36,7 @@
   "continue_with": "Continúa con",
   "No user found with this email": "No existe ningún usuario con este correo electrónico",
   "Invalid Password": "La contraseña es invalida",
+  "No user found with that email, or password invalid.": "No existe ningún usuario con este correo electrónico, o la contraseña es invalida.",
   "Email not confirmed": "Correo electrónico no confirmado",
   "User not found": "Usuario no encontrado"
 }

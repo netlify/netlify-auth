@@ -36,6 +36,7 @@
   "continue_with": "Bejelentkezés ezzel:",
   "No user found with this email": "Nem található fiók ezzel az e-mail címmel",
   "Invalid Password": "Helytelen Jelszó",
+  "No user found with that email, or password invalid.": "Nem található fiók ezzel az e-mail címmel, vagy helytelen jelszó.",
   "Email not confirmed": "Az e-mail nem erősült meg",
   "User not found": "Felhasználó nem található"
 }

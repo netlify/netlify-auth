@@ -36,6 +36,7 @@
   "continue_with": "Continue with",
   "No user found with this email": "No user found with this email",
   "Invalid Password": "Invalid Password",
+  "No user found with that email, or password invalid.": "No user found with that email, or password invalid.",
   "Email not confirmed": "Email not confirmed",
   "User not found": "User not found"
 }
