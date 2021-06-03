@@ -59,6 +59,7 @@ export default class UserForm extends Component {
                 name="email"
                 value={email}
                 placeholder={t("form_email_placeholder")}
+                autocomplete="email"
                 autocapitalize="off"
                 required
                 oninput={this.handleInput}
