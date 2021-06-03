@@ -53,6 +53,9 @@
   align-items: center;
   z-index: 99999;
 }
+.modalContainer[aria-hidden="true"] {
+  display: none;
+}
 
 .modalContainer::before {
   content: "";
@@ -253,7 +256,6 @@
 .btnClose::before {
   content: "×";
   font-size: 25px;
-  line-height: 9px;
 }
 
 .btnClose:hover,

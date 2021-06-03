@@ -74,19 +74,6 @@ const netlifyIdentity = {
   store
 };
 
-let queuedIframeStyle = null;
-function setStyle(el, css) {
-  let style = "";
-  for (const key in css) {
-    style += `${key}: ${css[key]}; `;
-  }
-  if (el) {
-    el.setAttribute("style", style);
-  } else {
-    queuedIframeStyle = style;
-  }
-}
-
 const localHosts = {
   localhost: true,
   "127.0.0.1": true,
@@ -112,28 +99,12 @@ function instantiateGotrue(APIUrl) {
 }
 
 let root;
-let iframe;
-const iframeStyle = {
-  position: "fixed",
-  top: 0,
-  left: 0,
-  border: "none",
-  width: "100%",
-  height: "100%",
-  overflow: "visible",
-  background: "transparent",
-  display: "none",
-  "z-index": 99
-};
+let shadow;
 
 observe(store.modal, "isOpen", () => {
   if (!store.settings) {
     store.loadSettings();
   }
-  setStyle(iframe, {
-    ...iframeStyle,
-    display: store.modal.isOpen ? "block !important" : "none"
-  });
   if (store.modal.isOpen) {
     trigger("open", store.modal.page);
   } else {
@@ -249,34 +220,29 @@ function init(options = {}) {
   store.init(instantiateGotrue(APIUrl));
   store.modal.logo = logo;
   store.setNamePlaceholder(namePlaceholder);
-  iframe = document.createElement("iframe");
-  iframe.id = "netlify-identity-widget";
-  iframe.title = "Netlify identity widget";
-  iframe.onload = () => {
-    const styles = iframe.contentDocument.createElement("style");
-    styles.innerHTML = modalCSS.toString();
-    iframe.contentDocument.head.appendChild(styles);
-    root = render(
-      <Provider store={store}>
-        <App />
-      </Provider>,
-      iframe.contentDocument.body,
-      root
-    );
-    runRoutes();
-  };
-  setStyle(iframe, iframeStyle);
-  iframe.src = "about:blank";
+
+  const wrapper = document.createElement("div");
+
+  root = render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    wrapper,
+    root
+  );
+  runRoutes();
+
   const container = options.container
     ? document.querySelector(options.container)
     : document.body;
-  container.appendChild(iframe);
-  /* There's a certain case where we might have called setStyle before the iframe was ready.
-	   Make sure we take the last style and apply it */
-  if (queuedIframeStyle) {
-    iframe.setAttribute("style", queuedIframeStyle);
-    queuedIframeStyle = null;
-  }
+  const shadowRoot = document.createElement("div");
+  container.appendChild(shadowRoot);
+  shadow = shadowRoot.attachShadow({ mode: "open" });
+
+  const styles = document.createElement("style");
+  styles.textContent = modalCSS.toString();
+  shadow.appendChild(styles);
+  shadow.appendChild(wrapper);
 }
 
 export default netlifyIdentity;
