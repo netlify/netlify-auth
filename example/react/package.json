@@ -4,8 +4,8 @@
   "private": true,
   "dependencies": {
     "netlify-identity-widget": "^1.4.14",
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^3.0.0"
   },
