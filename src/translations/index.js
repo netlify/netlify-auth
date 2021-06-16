@@ -6,9 +6,10 @@ import * as pt from "./pt.json";
 import * as pl from "./pl.json";
 import * as cs from "./cs.json";
 import * as sk from "./sk.json";
+import * as de from "./de.json";
 
 export const defaultLocale = "en";
-const translations = { en, fr, es, hu, pt, pl, cs, sk };
+const translations = { en, fr, es, hu, pt, pl, cs, sk, de };
 
 export const getTranslation = (key, locale = defaultLocale) => {
   const translated = translations[locale] && translations[locale][key];
