@@ -168,7 +168,7 @@ store.updatePassword = action(function updatePassword(password) {
     .then((user) => {
       store.user = user;
       store.recovered_user = null;
-      store.modal.page = "user";
+      store.message = "password_changed";
       store.saving = false;
     })
     .catch(store.setError);
@@ -256,7 +256,7 @@ store.verifyToken = action(function verifyToken(type, token) {
         });
       break;
     default:
-      store.error = "Unkown token type";
+      store.error = "Unknown token type";
   }
 });
 

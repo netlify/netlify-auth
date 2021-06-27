@@ -18,6 +18,7 @@ function trigger(callback) {
 const validActions = {
   login: true,
   signup: true,
+  updatePassword: true,
   error: true
 };
 
@@ -35,12 +36,13 @@ const netlifyIdentity = {
       }
     }
   },
-  open: (action) => {
-    action = action || "login";
+  open: (action = "login") => {
     if (!validActions[action]) {
       throw new Error(`Invalid action for open: ${action}`);
     }
-    store.openModal(store.user ? "user" : action);
+    store.openModal(
+      store.user && action !== "updatePassword" ? "user" : action
+    );
   },
   close: () => {
     store.closeModal();

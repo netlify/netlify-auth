@@ -9,8 +9,12 @@ const messages = {
     type: "success",
     text: "message_password_mail"
   },
+  password_changed: {
+    type: "success",
+    text: "message_password_changed"
+  },
   email_changed: {
-    type: "sucess",
+    type: "success",
     text: "message_email_changed"
   },
   verfication_error: {

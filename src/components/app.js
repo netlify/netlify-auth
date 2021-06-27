@@ -36,8 +36,8 @@ const pages = {
     link: "login",
     link_text: "never_mind"
   },
-  recovery: {
-    title: "recover_password",
+  updatePassword: {
+    title: "update_password",
     button: "update_password",
     button_saving: "updating_password",
     password: "new-password",
@@ -81,7 +81,7 @@ class App extends Component {
       case "invite":
         store.acceptInvite(password);
         break;
-      case "recovery":
+      case "updatePassword":
         store.updatePassword(password);
         break;
     }
@@ -104,11 +104,12 @@ class App extends Component {
     if (!store.settings) {
       return;
     }
-    if (store.user) {
+    if (store.user && store.modal.page !== "updatePassword") {
       return (
         <LogoutForm
           user={store.user}
           saving={store.saving}
+          onUpdatePassword={() => this.handlePage("updatePassword")}
           onLogout={this.handleLogout}
           t={store.translate}
         />
@@ -121,7 +122,7 @@ class App extends Component {
     return (
       <div>
         <UserForm
-          page={pages[store.modal.page] || {}}
+          page={page}
           message={store.message}
           saving={store.saving}
           onSubmit={this.handleUser}

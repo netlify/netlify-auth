@@ -183,4 +183,66 @@ describe("netlifyIdentity", () => {
       expect(store.gotrue.setCookie).toEqual(false);
     });
   });
+
+  describe("open", () => {
+    it("should invoke open event when called with no arguments", () => {
+      const { default: store } = require("./state/store");
+      const { default: netlifyIdentity } = require("./netlify-identity");
+      store.openModal = jest.fn();
+
+      netlifyIdentity.open();
+
+      expect(store.openModal).toHaveBeenCalledTimes(1);
+      expect(store.openModal).toHaveBeenCalledWith("login");
+    });
+  });
+
+  it("should invoke open event when called with a valid argument", () => {
+    const { default: store } = require("./state/store");
+    const { default: netlifyIdentity } = require("./netlify-identity");
+    store.openModal = jest.fn();
+
+    netlifyIdentity.open("signup");
+
+    expect(store.openModal).toHaveBeenCalledTimes(1);
+    expect(store.openModal).toHaveBeenCalledWith("signup");
+  });
+
+  it("should invoke open event with user if store.user exists", () => {
+    const { default: store } = require("./state/store");
+    const { default: netlifyIdentity } = require("./netlify-identity");
+    store.openModal = jest.fn();
+    store.user = {
+      name: "foo"
+    };
+
+    netlifyIdentity.open();
+
+    expect(store.openModal).toHaveBeenCalledTimes(1);
+    expect(store.openModal).toHaveBeenCalledWith("user");
+  });
+
+  it("should invoke open event with the updatePassword action if store.user exists", () => {
+    const { default: store } = require("./state/store");
+    const { default: netlifyIdentity } = require("./netlify-identity");
+    store.openModal = jest.fn();
+    store.user = {
+      name: "foo"
+    };
+
+    netlifyIdentity.open("updatePassword");
+
+    expect(store.openModal).toHaveBeenCalledTimes(1);
+    expect(store.openModal).toHaveBeenCalledWith("updatePassword");
+  });
+
+  it("should not invoke open event when called with an invalid argument", () => {
+    const { default: store } = require("./state/store");
+    const { default: netlifyIdentity } = require("./netlify-identity");
+    store.openModal = jest.fn();
+
+    const openInvalidAction = () => netlifyIdentity.open("invalid");
+
+    expect(openInvalidAction).toThrow("Invalid action for open: invalid");
+  });
 });

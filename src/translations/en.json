@@ -23,6 +23,7 @@
   "site_url_submit": "Set site's URL",
   "message_confirm": "A confirmation message was sent to your email, click the link there to continue.",
   "message_password_mail": "We've sent a recovery email to your account, follow the link there to reset your password.",
+  "message_password_changed": "Your password has been updated!",
   "message_email_changed": "Your email address has been updated!",
   "message_verfication_error": "There was an error verifying your account. Please try again or contact an administrator.",
   "message_signup_disabled": "Public signups are disabled. Contact an administrator and ask for an invite.",

@@ -2,10 +2,16 @@ import { h, Component } from "preact";
 import Button from "./button";
 
 export default class LogoutForm extends Component {
+  handleUpdatePassword = (e) => {
+    e.preventDefault();
+    this.props.onUpdatePassword();
+  };
+
   handleLogout = (e) => {
     e.preventDefault();
     this.props.onLogout();
   };
+
   render() {
     const { user, saving, t } = this.props;
 
@@ -22,6 +28,9 @@ export default class LogoutForm extends Component {
               user.email}
           </span>
         </p>
+        <button onClick={this.handleUpdatePassword} className="btn">
+          {t("update_password")}
+        </button>
         <Button
           saving={saving}
           text={t("log_out")}

@@ -13,6 +13,11 @@ class Controls extends Component {
     this.props.store.openModal("login");
   };
 
+  handleUpdatePassword = (e) => {
+    e.preventDefault();
+    this.props.store.openModal("updatePassword");
+  };
+
   handleLogout = (e) => {
     e.preventDefault();
     this.props.store.openModal("user");
@@ -54,6 +59,15 @@ class Controls extends Component {
               onClick={this.handleLogout}
             >
               {t("log_out")}
+            </a>
+          </li>
+          <li className="netlify-identity-item">
+            <a
+              className="netlify-identity-update-password"
+              href="#"
+              onClick={this.handleUpdatePassword}
+            >
+              {t("update_password")}
             </a>
           </li>
         </ul>
